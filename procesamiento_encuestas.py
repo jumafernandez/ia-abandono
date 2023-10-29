@@ -40,3 +40,4 @@ def main():
 
 if __name__ == "__main__":
     consolidated_df = main()
+    consolidated_df.to_excel('encuestas-procesadas.xlsx')
