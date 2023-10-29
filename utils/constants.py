@@ -42,8 +42,6 @@ COLUMNAS_NO_REEMPLAZAN_VALOR = ['documento', 'carrera', 'cr', '1-otros_(especifi
 '37-tu_trabajo', '37-otros', '37-especificar', '38-procesador_de_texto', '38-planilla_de_cálculo', '38-navegación_por_internet', '38-otros',
 '38-especificar', 'cohorte']
 
-PREGUNTAS_PARA_AGRUPAR = [1, 2, 4, 7, 8, 9, 10, 11, 15, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 35]
-
 # Nombre de la columna a cambiar
 COLUMNA_A_CAMBIAR = '33-no_trabajan_pero_est&aacuten_buscando_trabajo'
 NUEVO_NOMBRE_COLUMNA = '33-no_trabajan_pero_estan_buscando_trabajo'

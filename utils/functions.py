@@ -8,18 +8,9 @@ import os
 import re
 import pandas as pd
 import numpy as np
-from utils.constants import (
-    COLUMNAS_COMUNES, 
-    COLUMNA_A_CAMBIAR, 
-    NUEVO_NOMBRE_COLUMNA, 
-    COLUMNAS_NO_REEMPLAZAN_VALOR,
-    PREGUNTAS_PARA_AGRUPAR,
-)
 
-from utils.config import DIRECTORIO
-
-def cargar_archivo(cohorte, filename):
-    file_path = os.path.join(DIRECTORIO, filename)
+def cargar_archivo(cohorte, filename, DIR, columna_a_cambiar, nuevo_nombre_columna):
+    file_path = os.path.join(DIR, filename)
     print(f'Leyendo archivo XLSX: {filename}')
 
     df = pd.read_excel(file_path, header=0)
@@ -27,8 +18,8 @@ def cargar_archivo(cohorte, filename):
     df.columns = df.columns.str.lower().str.replace(' ', '_')
     df['cohorte'] = cohorte
 
-    if COLUMNA_A_CAMBIAR in df:
-        df = df.rename(columns={COLUMNA_A_CAMBIAR: NUEVO_NOMBRE_COLUMNA})
+    if columna_a_cambiar in df:
+        df = df.rename(columns={columna_a_cambiar: nuevo_nombre_columna})
 
     if cohorte < 2017:
         df = df.rename(columns=rename_columns)
@@ -55,27 +46,27 @@ def obtener_valor_no_nulo(row, columnas):
             return row[col]
     return np.nan
 
-def filtrar_columnas(df):
-    return df[COLUMNAS_COMUNES]
+def filtrar_columnas(df, columnas_comunes):
+    return df[columnas_comunes]
 
-def reemplazar_respuestas(df):
+def reemplazar_respuestas(df, columnas_no_reemplazan_valor):
     for col in df.columns:
-        if col not in COLUMNAS_NO_REEMPLAZAN_VALOR:
+        if col not in columnas_no_reemplazan_valor:
             df[col] = df[col].apply(lambda x: col if x == 1 else np.nan)
     return df
 
-def agrupar_preguntas(df):
+def agrupar_preguntas(df, preguntas_para_agrupar):
     df_consolidado = pd.DataFrame()
-    for pregunta in PREGUNTAS_PARA_AGRUPAR.keys():
+    for pregunta in preguntas_para_agrupar.keys():
         columnas_a_agrupar = [col for col in df.drop(['documento', 'cr', 'carrera', 'cohorte'], axis=1) if pregunta == int(col.split('-')[0])]
         df_consolidado[f'{pregunta}'] = df.apply(obtener_valor_no_nulo, args=(columnas_a_agrupar,), axis=1)
     return df_consolidado
 
-def consolidar_otras_preguntas(df, df_consolidado):
+def consolidar_otras_preguntas(df, df_consolidado, preguntas_para_agrupar):
     for columna in df.columns:
         if columna.split('-')[0].isdigit():
             numero_pregunta = int(columna.split('-')[0])
-            if numero_pregunta not in PREGUNTAS_PARA_AGRUPAR:
+            if numero_pregunta not in preguntas_para_agrupar:
                 df_consolidado[f'{columna}'] = df[columna]
         else:
             df_consolidado[columna] = df[columna]
@@ -91,3 +82,10 @@ def sort_columns(column_name):
 def ordenar_columnas(df):
     sorted_columns = sorted(df.columns, key=sort_columns)
     return df.reindex(columns=sorted_columns)
+
+def renombrar_columnas_con_diccionario(df, questions_dict):
+    for number, question in questions_dict.items():
+        str_number = str(number)
+        if str_number in df.columns:
+            df = df.rename(columns={str_number: question})
+    return df
