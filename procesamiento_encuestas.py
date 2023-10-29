@@ -28,9 +28,11 @@ def main():
             df = cargar_archivo(cohorte, filename)
             dataframes.append(df)
 
-    print('Se concatenan las encuestas...')
+    print('\nSe concatenan las encuestas...')
     combined_df = pd.concat(dataframes, ignore_index=True)
-
+    # Además, se pasa el dni a Int64, no float
+    combined_df["documento"] = pd.to_numeric(combined_df["documento"], errors='coerce').astype('Int64')
+    
     combined_df = filtrar_columnas(combined_df)
     combined_df = reemplazar_respuestas(combined_df)
 
@@ -40,11 +42,14 @@ def main():
 
     print('Se ordenan las columnas...')
     df_consolidado = ordenar_columnas(df_consolidado)
-
-    print('Procesamiento finalizado')
     
     return df_consolidado
 
 if __name__ == "__main__":
+
     consolidated_df = main()
+
+    print('Se exportan a encuestas-procesadas.xlsx los datos procesados para todos los años...')
     consolidated_df.to_excel('encuestas-procesadas.xlsx')
+
+    print('Procesamiento finalizado.')
