@@ -5,6 +5,7 @@ Created on Sat Oct 28 20:49:36 2023
 @author: jumaf
 """
 import os
+import re
 import pandas as pd
 import numpy as np
 from utils.constants import (
@@ -76,8 +77,17 @@ def consolidar_otras_preguntas(df, df_consolidado):
             numero_pregunta = int(columna.split('-')[0])
             if numero_pregunta not in PREGUNTAS_PARA_AGRUPAR:
                 df_consolidado[f'{numero_pregunta}'] = df[columna]
+        else:
+            df_consolidado[columna] = df[columna]
     return df_consolidado
 
+def extract_number_from_column_name(column_name):
+    match = re.search(r'\d+', column_name)
+    if match:
+        return (0, int(match.group()))
+    else:
+        return (1, column_name)
+    
 def ordenar_columnas(df):
-    sorted_columns = sorted(df.columns, key=lambda x: int(x), reverse=False)
+    sorted_columns = sorted(df.columns, key=extract_number_from_column_name)
     return df.reindex(columns=sorted_columns)
