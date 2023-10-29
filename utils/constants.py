@@ -47,3 +47,28 @@ PREGUNTAS_PARA_AGRUPAR = [1, 2, 4, 7, 8, 9, 10, 11, 15, 17, 18, 19, 20, 21, 22, 
 # Nombre de la columna a cambiar
 COLUMNA_A_CAMBIAR = '33-no_trabajan_pero_est&aacuten_buscando_trabajo'
 NUEVO_NOMBRE_COLUMNA = '33-no_trabajan_pero_estan_buscando_trabajo'
+
+PREGUNTAS_PARA_AGRUPAR = {
+    1 : "1-¿Con quien vas a vivir durante el periodo de clases?",
+    2 : "2-¿Por qué medio te trasladarás hasta la sede donde va a cursar durante el periodo de clases?",
+    4 : "4-En la elección de la UNLu, ¿Cuánto influyó la cercanía de la sede donde vas a cursar?",
+    7 : "7-¿Qué nivel estás cursando?",
+    8 : "8-¿Cuál fue el nivel mas alto que terminaste?",
+    9 : "9-¿Terminaste o estás cursando tus estudios en un Colegio?",
+    10 : "10-¿El Colegio es… (Privado/Público)",
+    11 : "11-Número del Colegio",
+    15 : "15-Orientación del título de Nivel Medio o Polimodal",
+    17 : "17-¿Tenés Obra Social y/o Mutual?",
+    18 : "18-¿Trabajás actualmente?",
+    19 : "19-La relación que hay entre tu trabajo y la Carrera que elegiste cursar es:",
+    20 : "20-En tu trabajo principal sos...",
+    21 : "21-¿En cuál de las siguientes ramas de la actividad ubicarías a tu trabajo principal?",
+    22 : "22-¿Tu trabajo principal es?",
+    23 : "23-¿Tu trabajo principal es?",
+    24 : "24-En una semana normal de trabajo ¿cuántas horas trabajás?",
+    25 : "25-Tus horarios son…",
+    26 : "26-¿Qué momentos del día abarca tu jornada de trabajo?",
+    27 : "27-¿Podés cambiar los horarios de trabajo?",
+    28 : "28-¿Estás en este momento buscando trabajo? (Solo para quienes no trabajan)",
+    35 : "34-¿Tenés conocimientos de otros idiomas?"
+}

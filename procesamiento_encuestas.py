@@ -40,7 +40,7 @@ def main():
     df_consolidado = agrupar_preguntas(combined_df)
     df_consolidado = consolidar_otras_preguntas(combined_df, df_consolidado)
 
-    print('Se ordenan las columnas...')
+    print('Se definen los nombres reales para las preguntas...')
     df_consolidado = ordenar_columnas(df_consolidado)
     
     return df_consolidado
