@@ -50,10 +50,11 @@ def main():
 
     print('Se definen los nombres reales para las preguntas...')
     df_consolidado = renombrar_columnas_con_diccionario(df_consolidado, PREGUNTAS_PARA_AGRUPAR)
+    df_consolidado = df_consolidado.rename(columns={'cr': 'sede'})
 
     print('Se ordenan las columnas...')
     df_consolidado = ordenar_columnas(df_consolidado)
-    
+
     return df_consolidado
 
 if __name__ == "__main__":
@@ -61,6 +62,6 @@ if __name__ == "__main__":
     consolidated_df = main()
 
     print('Se exportan a results/encuestas-procesadas.xlsx los datos procesados para todos los años...')
-    consolidated_df.to_excel('results/encuestas-procesadas.xlsx')
+    consolidated_df.to_excel('results/encuestas-procesadas.xlsx', index=False)
 
     print('Procesamiento finalizado.')
