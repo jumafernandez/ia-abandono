@@ -7,7 +7,6 @@ Created on Sat Oct 28 20:49:36 2023
 import os
 import re
 import pandas as pd
-import numpy as np
 
 def cargar_archivo(cohorte, filename, DIR, columna_a_cambiar, nuevo_nombre_columna):
     file_path = os.path.join(DIR, filename)
@@ -23,7 +22,7 @@ def cargar_archivo(cohorte, filename, DIR, columna_a_cambiar, nuevo_nombre_colum
 
     if cohorte < 2017:
         df = df.rename(columns=rename_columns)
-        df['6-medio_o_forma_por_el_cual_conoció_la_universidad'] = np.nan
+        df['6-medio_o_forma_por_el_cual_conoció_la_universidad'] = None
 
     return df
 
@@ -44,7 +43,7 @@ def obtener_valor_no_nulo(row, columnas):
     for col in columnas:
         if not pd.isna(row[col]):
             return row[col]
-    return np.nan
+    return None
 
 def filtrar_columnas(df, columnas_comunes):
     return df[columnas_comunes]
@@ -52,7 +51,7 @@ def filtrar_columnas(df, columnas_comunes):
 def reemplazar_respuestas(df, columnas_no_reemplazan_valor):
     for col in df.columns:
         if col not in columnas_no_reemplazan_valor:
-            df[col] = df[col].apply(lambda x: col if x == 1 else np.nan)
+            df[col] = df[col].apply(lambda x: col if x == 1 else None)
     return df
 
 def agrupar_preguntas(df, preguntas_para_agrupar):
