@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     consolidated_df = main()
 
-    print('Se exportan a encuestas-procesadas.xlsx los datos procesados para todos los años...')
-    consolidated_df.to_excel('encuestas-procesadas.xlsx')
+    print('Se exportan a results/encuestas-procesadas.xlsx los datos procesados para todos los años...')
+    consolidated_df.to_excel('results/encuestas-procesadas.xlsx')
 
     print('Procesamiento finalizado.')
