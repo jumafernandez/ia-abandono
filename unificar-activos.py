@@ -57,7 +57,7 @@ if __name__ == '__main__':
                 # Agrupar por 'legajo' y agregar los valores
                 consolidated_data = consolidated_data.groupby('legajo').first().reset_index()
 
-    print(f'Se filtran los estudiantes desde {COHORTE_HASTA} únicamente.')
+    print(f'Se filtran los estudiantes desde {COHORTE_DESDE} únicamente.')
     # Filtra las filas con anio_ingreso >= 2013
     df_filtrado = consolidated_data[(consolidated_data['anio_ingreso'] >= 2013) & (consolidated_data['anio_ingreso'] <= 2022)]
     
@@ -73,7 +73,7 @@ if __name__ == '__main__':
     print('Nos quedamos con las columnas y representación de las mismas que nos interesan: {columnas}')
     df_final = df_filtrado[columnas].fillna(0)
 
-    print('Se exportan a results/activos-procesadas-{COHORTE_DESDE}-{COHORTE_HASTA}.xlsx para los datos procesados.')
-    consolidated_df.to_excel('results/encuestas-procesadas.xlsx', index=False)
+    print(f'Se exportan a results/activos-procesados-{COHORTE_DESDE}-{COHORTE_HASTA}.xlsx para los datos procesados.')
+    df_final.to_excel(f'results/activos-procesados-{COHORTE_DESDE}-{COHORTE_HASTA}.xlsx', index=False)
 
-        print('Procesamiento finalizado.')
+    print('Procesamiento finalizado.')
