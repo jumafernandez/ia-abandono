@@ -73,4 +73,7 @@ if __name__ == '__main__':
     print('Nos quedamos con las columnas y representación de las mismas que nos interesan: {columnas}')
     df_final = df_filtrado[columnas].fillna(0)
 
-    
+    print('Se exportan a results/activos-procesadas-{COHORTE_DESDE}-{COHORTE_HASTA}.xlsx para los datos procesados.')
+    consolidated_df.to_excel('results/encuestas-procesadas.xlsx', index=False)
+
+        print('Procesamiento finalizado.')
