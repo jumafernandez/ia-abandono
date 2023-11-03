@@ -70,6 +70,5 @@ PREGUNTAS_PARA_AGRUPAR = {
     27 : "27-¿Qué momentos del día abarca tu jornada de trabajo?",
     28 : "28-¿Podés cambiar los horarios de trabajo?",
     29 : "29-¿Estás en este momento buscando trabajo? (Solo para quienes no trabajan)",
-#    30 : "30-¿Por quienes está integrado tu grupo familiar que vive actualmente con vos?",
     35 : "35-¿Tenés conocimientos de otros idiomas?"
 }
