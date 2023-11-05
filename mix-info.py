@@ -57,6 +57,12 @@ df = df.rename(columns={'carrera_x': 'carrera', 'sede_sca': 'sede'})
 nuevas_columnas = [col for col in df.columns if col not in ['activo-1c', 'activo-2c', 'abandono']] + ['activo-1c', 'activo-2c', 'abandono']
 df = df[nuevas_columnas]
 
+print('Por último, se eliminan los datasets que poseen más de 5 preguntas de la encuesta sin responder.')
+# Eliminar filas con más de 5 columnas nulas desde la sexta columna en adelante
+umbral = 5
+columnas_desde_la_sexta = df.columns[5:]
+df = df.dropna(subset=columnas_desde_la_sexta, thresh=umbral)
+
 print('Se exportan a results/dataset.xlsx para los datos procesados.')
 df.to_excel('results/dataset.xlsx', index=False)
 
